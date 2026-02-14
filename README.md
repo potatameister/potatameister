@@ -1,2 +1,1 @@
-![My Top Langs](./github-readme-stats.svg)
-
+![My Code Percentages](./profile/top-langs.svg)
