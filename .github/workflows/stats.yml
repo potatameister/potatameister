@@ -17,7 +17,7 @@ jobs:
         with:
           card: top-langs
           # options: transparent background, no border, modern theme
-          options: username=potatameister&layout=compact&theme=vision-friendly-dark&hide_border=true&bg_color=00000000
+          options: username=potatameister&layout=compact&theme=vision-friendly-dark
           token: ${{ secrets.STATS_TOKEN }}
 
       - name: Commit changes
