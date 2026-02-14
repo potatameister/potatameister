@@ -16,8 +16,8 @@ jobs:
         uses: readme-tools/github-readme-stats-action@v1
         with:
           card: top-langs
-          # options: transparent background, no border, modern theme
-          options: username=potatameister&layout=compact&theme=vision-friendly-dark
+          # Theme 'tokyonight' provides high contrast for both light and dark mode users
+          options: username=potatameister&layout=compact&theme=tokyonight&hide_border=false
           token: ${{ secrets.STATS_TOKEN }}
 
       - name: Commit changes
@@ -25,5 +25,5 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add .
-          git commit -m "Update GitHub stats" || echo "No changes to commit"
+          git commit -m "Update GitHub stats with high contrast theme" || echo "No changes to commit"
           git push
