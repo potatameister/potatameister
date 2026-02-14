@@ -1,8 +1,8 @@
 name: Update Stats
 on:
   schedule:
-    - cron: "0 0 * * *" # Updates daily
-  workflow_dispatch: # Allows manual trigger
+    - cron: "0 0 * * *" # Updates every night at midnight
+  workflow_dispatch: # Allows you to click "Run workflow" manually
 jobs:
   update-stats:
     runs-on: ubuntu-latest
@@ -13,12 +13,11 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Generate Stats Card
-        # This is a specific Action wrapper for the stats tool
         uses: readme-tools/github-readme-stats-action@v1
         with:
           card: top-langs
-          # Change "potatameister" to your name if needed
-          options: username=potatameister&layout=compact&theme=vision-friendly-dark
+          # options: transparent background, no border, modern theme
+          options: username=potatameister&layout=compact&theme=vision-friendly-dark&hide_border=true&bg_color=00000000
           token: ${{ secrets.STATS_TOKEN }}
 
       - name: Commit changes
