@@ -1,13 +1,30 @@
 name: Update Stats
 on:
   schedule:
-    - cron: "0 0 * * *" # Updates every night
-  workflow_dispatch: # Allows you to run it manually
+    - cron: "0 0 * * *" # Updates daily
+  workflow_dispatch: # Allows manual trigger
 jobs:
   update-stats:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
-      - uses: actions/checkout@v3
-      - uses: anuraghazra/github-readme-stats@master
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Generate Stats Card
+        # This is a specific Action wrapper for the stats tool
+        uses: readme-tools/github-readme-stats-action@v1
         with:
-          github_token: ${{ secrets.STATS_TOKEN }}
+          card: top-langs
+          # Change "potatameister" to your name if needed
+          options: username=potatameister&layout=compact&theme=vision-friendly-dark
+          token: ${{ secrets.STATS_TOKEN }}
+
+      - name: Commit changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit -m "Update GitHub stats" || echo "No changes to commit"
+          git push
