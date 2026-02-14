@@ -1,0 +1,13 @@
+name: Update Stats
+on:
+  schedule:
+    - cron: "0 0 * * *" # Updates every night
+  workflow_dispatch: # Allows you to run it manually
+jobs:
+  update-stats:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: anuraghazra/github-readme-stats@master
+        with:
+          github_token: ${{ secrets.STATS_TOKEN }}
